@@ -185,7 +185,9 @@ class ApiClient:
 
             if attr in obj:
                 value = obj[attr]
-                if attrType in ['str', 'int', 'float', 'bool']:
+                if attrType == 'str' and value is None:
+                    setattr(instance, attr, value)
+                elif attrType in ['str', 'int', 'float', 'bool']:
                     attrType = eval(attrType)
                     try:
                         value = attrType(value)
